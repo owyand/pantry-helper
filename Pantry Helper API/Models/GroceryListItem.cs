@@ -1,4 +1,4 @@
-namespace Pantry_Helper_API
+namespace Pantry_Helper_API.Models
 {
     public class GroceryListItem
     {
