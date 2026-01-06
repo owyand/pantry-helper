@@ -1,4 +1,4 @@
-﻿# Database Setup
+# Database Setup
 
 ## Prerequisites
 - SQL Server LocalDB or SQL Server Express

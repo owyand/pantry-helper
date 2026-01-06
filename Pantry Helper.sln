@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{02
 	ProjectSection(SolutionItems) = preProject
 		..\..\..\Documents\SQL Server Management Studio\Code Snippets\SQL\My Code Snippets\PantryHelper Database Scripts\1_CreateDatabase.sql = ..\..\..\Documents\SQL Server Management Studio\Code Snippets\SQL\My Code Snippets\PantryHelper Database Scripts\1_CreateDatabase.sql
 		..\..\..\Documents\SQL Server Management Studio\Code Snippets\SQL\My Code Snippets\PantryHelper Database Scripts\2_CreateTables.sql = ..\..\..\Documents\SQL Server Management Studio\Code Snippets\SQL\My Code Snippets\PantryHelper Database Scripts\2_CreateTables.sql
+		DatabaseSetup.md = DatabaseSetup.md
 	EndProjectSection
 EndProject
 Global

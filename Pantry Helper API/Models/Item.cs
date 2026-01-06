@@ -5,7 +5,7 @@ namespace Pantry_Helper_API.Models
         // Properties for identification
         public int Id { get; set; }
         /*ItemName maps to DB correctly with Dapper*/
-        public string ItemName { get; set; } = string.Empty;
+        public string Name { get; set; } = string.Empty;
         public string? Barcode { get; set; }
         /*[Fridge, Freezer, Pantry, Other]*/
         public string? Category { get; set; }

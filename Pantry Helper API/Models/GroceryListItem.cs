@@ -10,7 +10,7 @@ namespace Pantry_Helper_API.Models
         //Properties for grocery list management
         public int QuantityNeeded { get; set; }
         public bool IsPurchased { get; set; }
-        public DateOnly DateAdded { get; set; }
+        public DateOnly DateAdded { get; set; } // When the item was added to the grocery list
 
 
     }
