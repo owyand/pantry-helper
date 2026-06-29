@@ -35,9 +35,13 @@ namespace Pantry_Helper_API.Data
             return rowsAffected > 0;
         }
 
-        public Task<bool> DeleteOldestByBarcodeAsync(string barcode)
+        public async Task<bool> DeleteOldestByBarcodeAsync(string barcode)
         {
-            throw new NotImplementedException();
+            string sql = "DELETE FROM Items WHERE Id = (" +
+                "SELECT TOP 1 Id FROM Items WHERE Barcode = @Barcode ORDER BY PurchaseDate ASC);";
+
+            int rowsAffected = await _connection.ExecuteAsync(sql, new { Barcode = barcode });
+            return rowsAffected > 0;
         }
 
         public Task<IEnumerable<Item>> GetAllAsync()
@@ -48,16 +52,19 @@ namespace Pantry_Helper_API.Data
 
         public Task<IEnumerable<Item>> GetAllByBarcodeAsync(string barcode)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT FROM Items WHERE Barcode = @Barcode";
+            return _connection.QueryAsync<Item>(sql);
         }
 
         public Task<IEnumerable<Item>> GetAllByCategoryAsync(string category)
         {
-            throw new NotImplementedException();
+            string sql = "SELECT FROM Items WHERE Category = @Category";
+            return _connection.QueryAsync<Item>(sql);
         }
 
         public Task<IEnumerable<Item>> GetAllExpiredAsync()
         {
+            string sql = "SELECT FROM Items WHERE ExpirationDate "; //is expired
             throw new NotImplementedException();
         }
 
