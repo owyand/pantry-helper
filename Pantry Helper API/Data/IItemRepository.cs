@@ -18,7 +18,7 @@ namespace Pantry_Helper_API.Data
         Task<IEnumerable<Item>> GetAllAsync();
 
         /*UPDATE*/
-        Task UpdateAsync(Item item);
+        Task<bool> UpdateAsync(Item item); // Update an item
 
         /*DELETE*/
         Task<bool> DeleteAsync(int id); //boolean to indicate success or failure of deletion
