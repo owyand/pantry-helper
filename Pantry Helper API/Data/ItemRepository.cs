@@ -17,15 +17,7 @@ namespace Pantry_Helper_API.Data
                 "VALUES(@Name, @Barcode, @Category, @PurchaseDate, @ExpirationDate, @AutoAddToGroceryListWhenTrashed);" +
                 "SELECT CAST(SCOPE_IDENTITY() AS INT);";
             
-            return _connection.QuerySingleAsync<int>(sql, new
-            {
-                Name = item.Name,
-                Barcode = item.Barcode,
-                Category = item.Category,
-                PurchaseDate = item.PurchaseDate,
-                ExpirationDate = item.ExpirationDate,
-                AutoAddToGroceryListWhenTrashed = item.AutoAddToGroceryListWhenTrashed
-            });
+            return _connection.QuerySingleAsync<int>(sql, item);
         }
 
         // Delete an item from the database by its ID
@@ -41,7 +33,8 @@ namespace Pantry_Helper_API.Data
         public async Task<bool> DeleteOldestByBarcodeAsync(string barcode)
         {
             string sql = "DELETE FROM Items WHERE Id = (" +
-                "SELECT TOP 1 Id FROM Items WHERE Barcode = @Barcode ORDER BY PurchaseDate ASC);";
+                "SELECT TOP 1 Id FROM Items WHERE Barcode = @Barcode " +
+                "ORDER BY PurchaseDate ASC);";
 
             int rowsAffected = await _connection.ExecuteAsync(sql, new { Barcode = barcode });
             return rowsAffected > 0;
@@ -78,7 +71,8 @@ namespace Pantry_Helper_API.Data
         // Get all items that will expire within a given number of days from the database
         public Task<IEnumerable<Item>> GetAllExpiringSoonAsync(int daysUntilExpiration)
         {
-            string sql = "SELECT * FROM Items WHERE ExpirationDate >= GETDATE() AND ExpirationDate <= DATEADD(day, @DaysUntilExpiration, GETDATE())";
+            string sql = "SELECT * FROM Items WHERE ExpirationDate >= GETDATE() " +
+                "AND ExpirationDate <= DATEADD(day, @DaysUntilExpiration, GETDATE())";
             return _connection.QueryAsync<Item>(sql, new { DaysUntilExpiration = daysUntilExpiration });
         }
 
@@ -86,11 +80,11 @@ namespace Pantry_Helper_API.Data
         public Task<Item?> GetByIdAsync(int id)
         {
             string sql = "SELECT * FROM Items WHERE Id = @Id";
-            return _connection.QuerySingleOrDefaultAsync<Item>(sql, new {Id = id});
+            return _connection.QuerySingleOrDefaultAsync<Item>(sql, id);
         }
 
         // Make changes to an existing item in the database
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdateAsync(Item item)
         {
             string sql = "UPDATE Items SET Name = @Name, " +
                 "Category = @Category, " +
