@@ -17,7 +17,7 @@ namespace Pantry_Helper_API.Controllers
         {
             _logger = logger;
         }
-
+        /*
         [HttpGet(Name = "GetWeatherForecast")]
         public IEnumerable<WeatherForecast> Get()
         {
@@ -28,6 +28,6 @@ namespace Pantry_Helper_API.Controllers
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
             .ToArray();
-        }
+        }*/
     }
 }
